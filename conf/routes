@@ -2,26 +2,23 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
-# An example controller showing how to write asynchronous code
-GET     /getMessage                    controllers.AsyncExampleController.index()
+# Default path will just redirect to the computer list
+GET     /                           controllers.HomeController.index()
 
+# Computers list (look at the default values for pagination parameters)
+GET     /computers                  controllers.HomeController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 
+# Add computer
+GET     /computers/new              controllers.HomeController.create()
+POST    /computers                  controllers.HomeController.save()
 
+# Edit existing computer
+GET     /computers/:id              controllers.HomeController.edit(id:Long)
+POST    /computers/:id              controllers.HomeController.update(id:Long)
 
-GET     /books                      controllers.BooksController.index()
-GET     /books/create               controllers.BooksController.create()
-GET     /books/:id                  controllers.BooksController.show(id : Integer)
-GET     /books/edit/:id             controllers.BooksController.edit(id: Integer)
-PUT     /books/edit                 controllers.BooksController.update()
-POST    /books/create               controllers.BooksController.save()
-DELETE  /books/delete/:id           controllers.BooksController.destroy(id: Integer)
-
+# Delete a computer
+POST    /computers/:id/delete       controllers.HomeController.delete(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

@@ -1,0 +1,9 @@
+/.idea/
+/logs/
+/target/
+/.g8/
+/.settings
+.project
+.classpath
+/project/project/
+/project/target/

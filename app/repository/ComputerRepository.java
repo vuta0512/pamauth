@@ -62,10 +62,10 @@ public class ComputerRepository {
             try {
                 Computer savedComputer = ebeanServer.find(Computer.class).setId(id).findUnique();
                 if (savedComputer != null) {
-                    savedComputer.company = newComputerData.company;
-                    savedComputer.discontinued = newComputerData.discontinued;
-                    savedComputer.introduced = newComputerData.introduced;
-                    savedComputer.name = newComputerData.name;
+                    savedComputer.setCompany(newComputerData.getCompany());
+                    savedComputer.setDiscontinued(newComputerData.getDiscontinued());
+                    savedComputer.setIntroduced(newComputerData.getIntroduced());
+                    savedComputer.setName(newComputerData.getName());
 
                     savedComputer.update();
                     txn.commit();

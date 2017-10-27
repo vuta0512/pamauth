@@ -16,16 +16,48 @@ public class Computer extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     @Constraints.Required
-    public String name;
+    private String name;
     
     @Formats.DateTime(pattern="yyyy-MM-dd")
-    public Date introduced;
-    
+    private Date introduced;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getIntroduced() {
+        return introduced;
+    }
+
+    public void setIntroduced(Date introduced) {
+        this.introduced = introduced;
+    }
+
+    public Date getDiscontinued() {
+        return discontinued;
+    }
+
+    public void setDiscontinued(Date discontinued) {
+        this.discontinued = discontinued;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Formats.DateTime(pattern="yyyy-MM-dd")
-    public Date discontinued;
+    private Date discontinued;
     
     @ManyToOne
-    public Company company;
+    private Company company;
     
 }
 

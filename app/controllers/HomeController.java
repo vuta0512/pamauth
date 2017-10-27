@@ -103,7 +103,7 @@ public class HomeController extends Controller {
             // Run update operation and then flash and then redirect
             return computerRepository.update(id, newComputerData).thenApplyAsync(data -> {
                 // This is the HTTP rendering thread context
-                flash("success", "Computer " + newComputerData.name + " has been updated");
+                flash("success", "Computer " + newComputerData.getName() + " has been updated");
                 return GO_HOME;
             }, httpExecutionContext.current());
         }
@@ -138,7 +138,7 @@ public class HomeController extends Controller {
         // Run insert db operation, then redirect
         return computerRepository.insert(computer).thenApplyAsync(data -> {
             // This is the HTTP rendering thread context
-            flash("success", "Computer " + computer.name + " has been created");
+            flash("success", "Computer " + computer.getName() + " has been created");
             return GO_HOME;
         }, httpExecutionContext.current());
     }

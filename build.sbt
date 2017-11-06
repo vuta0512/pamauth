@@ -8,7 +8,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
   
 libraryDependencies += guice
 libraryDependencies += jdbc
-libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
 libraryDependencies += javaJdbc % Test
 libraryDependencies += evolutions
 
@@ -19,10 +18,12 @@ testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-a", "-v")
 
 libraryDependencies ++= Seq(
   filters,
+  "mysql" % "mysql-connector-java" % "5.1.41",
   "com.adrianhurt" %% "play-bootstrap" % "1.2-P26-B3",
   "org.webjars" % "bootstrap" % "3.3.7-1" exclude("org.webjars", "jquery"),
   "org.webjars" % "jquery" % "3.2.1",
   "org.webjars" % "font-awesome" % "4.7.0",
   "org.webjars" % "bootstrap-datepicker" % "1.4.0" exclude("org.webjars", "bootstrap"),
-  "be.objectify" %% "deadbolt-java" % "2.6.1"
+  "be.objectify" %% "deadbolt-java" % "2.6.1",
+  "be.objectify" %% "deadbolt-java-gs" % "2.6.0"
 )

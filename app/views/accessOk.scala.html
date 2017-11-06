@@ -1,0 +1,17 @@
+@(title: String)
+
+@import be.objectify.deadbolt.java.views.html.di.pattern
+
+<html>
+    <head>
+        <title>@title</title>
+    </head>
+    <body>
+        <h3>Access OK!</h3>
+
+        @pattern(value = "printers.edit") {
+            Subject must have a permission with the exact value "admin.printer" for this to be visible
+        }
+    </body>
+</html>
+

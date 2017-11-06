@@ -23,5 +23,6 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.7-1" exclude("org.webjars", "jquery"),
   "org.webjars" % "jquery" % "3.2.1",
   "org.webjars" % "font-awesome" % "4.7.0",
-  "org.webjars" % "bootstrap-datepicker" % "1.4.0" exclude("org.webjars", "bootstrap")
+  "org.webjars" % "bootstrap-datepicker" % "1.4.0" exclude("org.webjars", "bootstrap"),
+  "be.objectify" %% "deadbolt-java" % "2.6.1"
 )

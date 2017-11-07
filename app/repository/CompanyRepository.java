@@ -27,7 +27,7 @@ public class CompanyRepository {
         this.executionContext = executionContext;
     }
 
-    public CompletionStage<Map<String, String>> options() {
+   /* public CompletionStage<Map<String, String>> options() {
         return supplyAsync(() -> ebeanServer.find(Company.class).orderBy("name").findList(), executionContext)
                 .thenApply(list -> {
                     HashMap<String, String> options = new LinkedHashMap<String, String>();
@@ -36,6 +36,6 @@ public class CompanyRepository {
                     }
                     return options;
                 });
-    }
+    }*/
 
 }

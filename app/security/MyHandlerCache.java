@@ -1,5 +1,6 @@
 package security;
 
+import be.objectify.deadbolt.java.ConfigKeys;
 import be.objectify.deadbolt.java.DeadboltHandler;
 import be.objectify.deadbolt.java.ExecutionContextProvider;
 import be.objectify.deadbolt.java.cache.HandlerCache;
@@ -13,31 +14,24 @@ import java.util.Map;
  * @author Steve Chaloner (steve@objectify.be)
  */
 @Singleton
-public class MyHandlerCache implements HandlerCache
-{
+public class MyHandlerCache implements HandlerCache {
+
     private final DeadboltHandler defaultHandler;
     private final Map<String, DeadboltHandler> handlers = new HashMap<>();
 
     @Inject
-    public MyHandlerCache(final ExecutionContextProvider ecProvider)
-    {
+    public MyHandlerCache(final ExecutionContextProvider ecProvider) {
         defaultHandler = new MyDeadboltHandler(ecProvider);
-
-        handlers.put(HandlerKeys.DEFAULT.key, defaultHandler);
-        handlers.put(HandlerKeys.ALT.key, new MyAlternativeDeadboltHandler(ecProvider));
-        handlers.put(HandlerKeys.BUGGY.key, new BuggyDeadboltHandler(ecProvider));
-        handlers.put(HandlerKeys.NO_USER.key, new NoUserDeadboltHandler(ecProvider));
+        handlers.put(ConfigKeys.DEFAULT_HANDLER_KEY, defaultHandler);
     }
 
     @Override
-    public DeadboltHandler apply(final String key)
-    {
+    public DeadboltHandler apply(final String key) {
         return handlers.get(key);
     }
 
     @Override
-    public DeadboltHandler get()
-    {
+    public DeadboltHandler get() {
         return defaultHandler;
     }
 }

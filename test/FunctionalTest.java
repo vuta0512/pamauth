@@ -1,3 +1,4 @@
+import controllers.ApplicationController;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -17,7 +18,7 @@ public class FunctionalTest extends WithApplication {
 
     @Test
     public void redirectHomePage() {
-        Result result = route(app, controllers.routes.HomeController.index());
+        Result result = route(app, ApplicationController.index());
 
         assertThat(result.status()).isEqualTo(SEE_OTHER);
         assertThat(result.redirectLocation().get()).isEqualTo("/computers");
@@ -25,7 +26,7 @@ public class FunctionalTest extends WithApplication {
 
     @Test
     public void listComputersOnTheFirstPage() {
-        Result result = route(app, controllers.routes.HomeController.list(0, "name", "asc", ""));
+        Result result = route(app, ApplicationController.list(0, "name", "asc", ""));
 
         assertThat(result.status()).isEqualTo(OK);
         assertThat(contentAsString(result)).contains("574 computers found");
@@ -33,7 +34,7 @@ public class FunctionalTest extends WithApplication {
 
     @Test
     public void filterComputerByName() {
-        Result result = route(app, controllers.routes.HomeController.list(0, "name", "asc", "Apple"));
+        Result result = route(app, ApplicationController.list(0, "name", "asc", "Apple"));
 
         assertThat(result.status()).isEqualTo(OK);
         assertThat(contentAsString(result)).contains("13 computers found");
@@ -41,7 +42,7 @@ public class FunctionalTest extends WithApplication {
 
     @Test
     public void createANewComputer() {
-        Result result = route(app, addCSRFToken(fakeRequest().uri(controllers.routes.HomeController.save().url())));
+        Result result = route(app, addCSRFToken(fakeRequest().uri(ApplicationController.save().url())));
         assertThat(result.status()).isEqualTo(OK);
 
         Map<String, String> data = new HashMap<>();
@@ -49,7 +50,7 @@ public class FunctionalTest extends WithApplication {
         data.put("introduced", "badbadbad");
         data.put("company.id", "1");
 
-        String saveUrl = controllers.routes.HomeController.save().url();
+        String saveUrl = ApplicationController.save().url();
         result = route(app, addCSRFToken(fakeRequest().bodyForm(data).method("POST").uri(saveUrl)));
 
         assertThat(result.status()).isEqualTo(BAD_REQUEST);
@@ -67,7 +68,7 @@ public class FunctionalTest extends WithApplication {
         assertThat(result.redirectLocation().get()).isEqualTo("/computers");
         assertThat(result.flash().get("success")).isEqualTo("Computer FooBar has been created");
 
-        result = route(app, controllers.routes.HomeController.list(0, "name", "asc", "FooBar"));
+        result = route(app, ApplicationController.list(0, "name", "asc", "FooBar"));
         assertThat(result.status()).isEqualTo(OK);
         assertThat(contentAsString(result)).contains("One computer found");
     }

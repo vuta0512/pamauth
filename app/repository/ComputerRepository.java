@@ -37,7 +37,7 @@ public class ComputerRepository {
      * @param order    Sort order (either or asc or desc)
      * @param filter   Filter applied on the name column
      */
-    public CompletionStage<PagedList<Computer>> page(int page, int pageSize, String sortBy, String order, String filter) {
+   /* public CompletionStage<PagedList<Computer>> page(int page, int pageSize, String sortBy, String order, String filter) {
         return supplyAsync(() -> {
             return ebeanServer.find(Computer.class).where()
                     .ilike("name", "%" + filter + "%")
@@ -96,5 +96,5 @@ public class ComputerRepository {
              ebeanServer.insert(computer);
              return computer.id;
         }, executionContext);
-    }
+    }*/
 }

@@ -18,7 +18,7 @@ import java.util.concurrent.CompletionStage;
 /**
  * Manage a database of computers
  */
-public class HomeController extends Controller {
+public class ApplicationController extends Controller {
 
     private final ComputerRepository computerRepository;
     private final CompanyRepository companyRepository;
@@ -26,38 +26,43 @@ public class HomeController extends Controller {
     private final HttpExecutionContext httpExecutionContext;
 
     @Inject
-    public HomeController(FormFactory formFactory,
-                          ComputerRepository computerRepository,
-                          CompanyRepository companyRepository,
-                          HttpExecutionContext httpExecutionContext) {
+    public ApplicationController(FormFactory formFactory,
+                                 ComputerRepository computerRepository,
+                                 CompanyRepository companyRepository,
+                                 HttpExecutionContext httpExecutionContext) {
         this.computerRepository = computerRepository;
         this.formFactory = formFactory;
         this.companyRepository = companyRepository;
         this.httpExecutionContext = httpExecutionContext;
     }
 
-    /**
+    public Result index() {
+        return ok("OK");
+    }
+
+
+   /* *//**
      * This result directly redirect to application home.
-     */
+     *//*
     private Result GO_HOME = Results.redirect(
-            routes.HomeController.list(0, "name", "asc", "")
+            ApplicationController.list(0, "name", "asc", "")
     );
 
-    /**
+    *//**
      * Handle default path requests, redirect to computers list
-     */
+     *//*
     public Result index() {
         return GO_HOME;
     }
 
-    /**
+    *//**
      * Display the paginated list of computers.
      *
      * @param page   Current page number (starts from 0)
      * @param sortBy Column to be sorted
      * @param order  Sort order (either asc or desc)
      * @param filter Filter applied on computer names
-     */
+     *//*
     public CompletionStage<Result> list(int page, String sortBy, String order, String filter) {
         // Run a db operation in another thread (using DatabaseExecutionContext)
         return computerRepository.page(page, 10, sortBy, order, filter).thenApplyAsync(list -> {
@@ -66,11 +71,11 @@ public class HomeController extends Controller {
         }, httpExecutionContext.current());
     }
 
-    /**
+    *//**
      * Display the 'edit form' of a existing Computer.
      *
      * @param id Id of the computer to edit
-     */
+     *//*
     public CompletionStage<Result> edit(Long id) {
 
         // Run a db operation in another thread (using DatabaseExecutionContext)
@@ -85,11 +90,11 @@ public class HomeController extends Controller {
         }, httpExecutionContext.current());
     }
 
-    /**
+    *//**
      * Handle the 'edit form' submission
      *
      * @param id Id of the computer to edit
-     */
+     *//*
     public CompletionStage<Result> update(Long id) throws PersistenceException {
         Form<Computer> computerForm = formFactory.form(Computer.class).bindFromRequest();
         if (computerForm.hasErrors()) {
@@ -109,9 +114,9 @@ public class HomeController extends Controller {
         }
     }
 
-    /**
+    *//**
      * Display the 'new computer form'.
-     */
+     *//*
     public CompletionStage<Result> create() {
         Form<Computer> computerForm = formFactory.form(Computer.class);
         // Run companies db operation and then render the form
@@ -121,9 +126,9 @@ public class HomeController extends Controller {
         }, httpExecutionContext.current());
     }
 
-    /**
+    *//**
      * Handle the 'new computer form' submission
-     */
+     *//*
     public CompletionStage<Result> save() {
         Form<Computer> computerForm = formFactory.form(Computer.class).bindFromRequest();
         if (computerForm.hasErrors()) {
@@ -143,9 +148,9 @@ public class HomeController extends Controller {
         }, httpExecutionContext.current());
     }
 
-    /**
+    *//**
      * Handle computer deletion
-     */
+     *//*
     public CompletionStage<Result> delete(Long id) {
         // Run delete db operation, then redirect
         return computerRepository.delete(id).thenApplyAsync(v -> {
@@ -154,6 +159,6 @@ public class HomeController extends Controller {
             return GO_HOME;
         }, httpExecutionContext.current());
     }
-
+*/
 }
             

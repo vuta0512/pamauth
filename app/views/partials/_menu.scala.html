@@ -1,0 +1,54 @@
+@renderMenu(mn: Menu) = {
+    @if(mn.getId > 1L) {
+        <li><a href="@mn.getPath">@mn.getName</a></li>
+    }
+    @if(!mn.getMenuList.isEmpty) {
+        <ul>
+        @for(menu <- mn.getMenuList) {
+            @renderMenu(menu)
+        }
+        </ul>
+    }
+}
+
+@renderMenuWithPerm(mn: Menu, group: Group) = {
+    @for(menu <- group.getMenus) {
+        @if(menu.getId.eq(mn.getId)) {
+            @if(mn.getId > 1L) {
+                <li><a href="@mn.getPath">@mn.getName</a></li>
+            }
+            @if(!mn.getMenuList.isEmpty) {
+                <ul>
+                @for(m <- mn.getMenuList) {
+                    @renderMenuWithPerm(m, group)
+                }
+                </ul>
+            }
+        }
+    }
+}
+
+<div>
+    <p>Sample full tree</p>
+    @renderMenu(Menu.findById(1L))
+</div>
+<hr>
+<div>
+    <p>Sample admin tree</p>
+    @renderMenuWithPerm(Menu.findById(1L), Group.findById(1L))
+</div>
+<hr>
+<div>
+    <p>Sample tabirai tree</p>
+    @renderMenuWithPerm(Menu.findById(1L), Group.findById(2L))
+</div>
+<hr>
+<div>
+    <p>Sample churatoku tree</p>
+    @renderMenuWithPerm(Menu.findById(1L), Group.findById(3L))
+</div>
+<hr>
+<div>
+    <p>Sample all supplier tree</p>
+    @renderMenuWithPerm(Menu.findById(1L), Group.findById(4L))
+</div>

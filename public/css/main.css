@@ -22,5 +22,12 @@ section#main .topRight {
     top: 70px;
 }
 
-
-
+.breadcrumb ul {
+    transform: rotate(180deg);
+}
+.breadcrumb ul > li {
+    transform: rotate(-180deg);
+    float: left;
+    display: inline;
+    margin-left: 10px;
+}

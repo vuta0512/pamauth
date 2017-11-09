@@ -1,6 +1,6 @@
 package controllers;
 
-import models.Computer;
+import models.Menu;
 import play.data.Form;
 import play.data.FormFactory;
 import play.libs.concurrent.HttpExecutionContext;
@@ -38,6 +38,10 @@ public class ApplicationController extends Controller {
 
     public Result index() {
         return ok("OK");
+    }
+
+    public Result menu() {
+        return ok(views.html.menu.render());
     }
 
 

@@ -1,0 +1,13 @@
+@renderBreadcrumb(mn: Menu) = {
+    <li><a href="@mn.getPath">&gt;@mn.getName</a></li>
+    @if(mn.getMenu.getId > 0L) {
+        @renderBreadcrumb(mn.getMenu)
+    }
+}
+
+<div class="breadcrumb">
+    <ul>
+    @renderBreadcrumb(Menu.findById(12L))
+    </ul>
+</div>
+
